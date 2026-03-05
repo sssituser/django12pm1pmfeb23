@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'myapp/base.html'%}
+
+{%block bodyblock%}
+  <div class="container mt-lg-5 ">
+   
+
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-4">
+          <div class="card animate__animated animate__flip">
+            <div class="card-header bg-primary text-white text-center">
+              <h2>SignIn Here</h2>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="User Name">
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" placeholder="password">
+                </div>
+               
+                <div>
+                  <button class="btn btn-outline-primary btn-sm">SignIn</button>
+                  <a href="/" class="btn btn-outline-warning btn-sm float-end">Back</a>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+{%endblock%}
