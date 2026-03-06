@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'myapp/base.html' %}
+{%load static%}
+
+
+{%block contentblock%}
+    <div class="container">
+            <h1 class="text-center">Image Gallery</h1>
+            <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/img1.jpg'%}" class=" img-fluid img-thumbnail" alt="">
+                            </div>
+                            <div class="card-footer">
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, distinctio.
+                                </p>
+                                <button class="btn btn-sm btn-outline-primary">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/img2.jpg'%}" class=" img-fluid img-thumbnail" alt="">
+                            </div>
+                            <div class="card-footer">
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, distinctio.
+                                </p>
+                                <button class="btn btn-sm btn-outline-primary">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/img3.jpg'%}" class=" img-fluid img-thumbnail" alt="">
+                            </div>
+                            <div class="card-footer">
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, distinctio.
+                                </p>
+                                <button class="btn btn-sm btn-outline-primary">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{% static 'images/img4.jpg'%}" class=" img-fluid img-thumbnail" alt="">
+                            </div>
+                            <div class="card-footer">
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, distinctio.
+                                </p>
+                                <button class="btn btn-sm btn-outline-primary">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+{%endblock%}
