@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+/>
+
+<!-- Google Roboto font (optional, recommended for Material Design look) -->
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+/>
+
+<!-- MDBootstrap CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/mdb-ui-kit@latest/css/mdb.min.css"
+/>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+    <div class="container mt-5">
+        <p class="lead">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis hic velit rem! Eaque iure, voluptatem consequuntur corporis nam laudantium, sint consectetur recusandae aperiam ipsam consequatur sunt illum expedita? Nisi vitae modi sint, recusandae quas animi dolor cupiditate quisquam rem dolorem dignissimos corrupti a quaerat blanditiis ducimus commodi ad illum, porro at ex deserunt magni et reprehenderit cum? At nisi tempora debitis ea doloremque sed amet beatae maiores voluptatum dolore, quos veritatis blanditiis atque eveniet minus nobis accusantium sint repudiandae voluptas.
+        </p>
+                        {% if emps %}
+                            <table class="table table-bordered table-hover text-center">
+                                <thead>
+                                    <tr  >    
+                                        <td class="bg-dark text-white">ID</td>
+                                        <td class="bg-dark text-white">Employee ID</td>
+                                        <td class="bg-dark text-white">Employee Name</td>
+                                        <td class="bg-dark text-white">Employee Salary</td>
+                                    
+                                    </tr >
+                                </thead>
+                                <tbody>
+                                    {% for emp in emps %}
+                                    <tr>
+                                        <td>{{emp.id}}</td>
+                                        <td>{{emp.EmpId}}</td>
+                                        <td>{{emp.EmpName}}</td>
+                                        <td>{{emp.EmpSal}}</td>
+                                        <td><a href="#">Edit</a></td>
+                                    </tr>
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <h1>Records Not Found</h1>
+                        {% endif %}
+    </div>
+</body>
+</html>
