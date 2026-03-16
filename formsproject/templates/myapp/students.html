@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'myapp/base.html' %}
+
+{% block contentblock %}
+    <div class="container">
+        <p class="h1 text-center text-primary">Students Info</p>
+        <section>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/register" class="btn btn-sm btn-outline-success ">Add Student</a>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row mt-5 justify-content-center">
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-body">
+                           {%if studs%}
+                                <table class="table table-bordered table-hover table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="bg-primary text-white">ID</th>
+                                            <th class="bg-primary text-white">Student ID</th>
+                                            <th class="bg-primary text-white">Student Name</th>
+                                            <th class="bg-primary text-white">Student Marks</th>
+                                            <th class="bg-primary text-white">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {%for student in studs%}
+                                            <tr>
+                                                <td>{{student.id}}</td>
+                                                <td>{{student.StuId}}</td>
+                                                <td>{{student.StuName}}</td>
+                                                <td>{{student.StuMarks}}</td>
+                                                <td>
+                                                    <a href="/find/{{student.id}}/" class="btn btn-sm btn-success">Find</a>
+                                                    <a href="/edit/{{student.id}}/" class="btn btn-sm btn-primary">Edit</a>
+                                                    <a href="/delete/{{student.id}}/" class="btn btn-sm btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        {%endfor%}
+                                    </tbody>
+                                </table>
+                           {%else%}
+                            <p class="h1 text-danger">Records not Found</p>
+                           {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

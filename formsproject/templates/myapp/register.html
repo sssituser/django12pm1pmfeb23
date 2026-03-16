@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends 'myapp/base.html' %}
+{% load widget_tweaks %}
+
+{% block contentblock %}
+    <div class="container">
+        
+        <div class="row d-flex justify-content-center align-items-center mt-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                            <p class="h2">Add Student</p>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {%csrf_token%}
+                        
+                            <div class="form-group mb-3">
+                                {{form.StuId | add_class:"form-control" | attr:"Placeholder=EnterID"}}
+                            </div>
+
+                            <div class="form-group mb-3">
+                                {{form.StuName | add_class:"form-control" | attr:"Placeholder=EnterName"}}
+                            </div>
+
+                             <div class="form-group mb-3">
+                                {{form.StuMarks | add_class:"form-control" | attr:"Placeholder=EnterMarks"}}
+                            </div>
+
+
+                             
+                            <button class="btn btn-sm btn-primary">Register</button>
+                            <a href="/" class="btn btn-sm btn-warning float-end">List</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

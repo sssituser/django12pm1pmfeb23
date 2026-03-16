@@ -1,0 +1,29 @@
+<!DOCTYPE>
+{% extends 'myapp/base.html' %}
+{% block contentblock %}
+    <div class="container mt-5">
+        
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header text-center bg-danger text-white">
+                        <p class="h1">Do You Want Delete ?</p>
+                    </div>
+                    <div class="card-body text-left">
+                        <p class="h2">Student ID : {{student.StuId}}</p>
+                        <p class="h2">Student Name : {{student.StuName}}</p>
+                         <p class="h2">Student  Marks: {{student.StuMarks}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <form action="" method="POST">
+                            {%csrf_token%}
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                            <a href="/" class="btn btn-sm btn-warning float-end">Back</a>
+                        </form>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
