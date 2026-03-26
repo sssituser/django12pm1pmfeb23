@@ -5,5 +5,36 @@
 {% block contentblock   %}
     <div class="container">
         <p class="h1 text-center">Students List Page</p>
+        {%if student_list%}
+            <p class="h1 text-center text-success">Records Found</p>
+            <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, corporis. Nostrum doloribus consequuntur, debitis deleniti error ipsa exercitationem dolore harum illum architecto, voluptatibus beatae culpa veniam quasi consequatur totam assumenda, optio sed nesciunt non vero possimus natus amet? Cupiditate, voluptates?
+                <br/>
+                <a href="/create" class="btn btn-md btn-primary">Add</a>
+            </p>
+            <table class="table table-bordered table-hover table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Student Marks</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stu in student_list %}
+                        <tr>
+                            <td>{{stu.StudentId}}</td>
+                            <td>{{stu.StdentName}}</td>
+                            <td>{{stu.StudentMarks}}</td>
+                            <td><a href="/edit/{{stu.id}}/" class="btn btn-sm btn-primary">Edit</a>
+                                 Find Delete</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        {%else%}
+            <p class="h1 text-danger text-center">Records not found</p>
+        {%endif%}
     </div>
 {% endblock %}

@@ -17,7 +17,9 @@
                             {{form.StudentId|add_class:"form-control"|attr:"placeholder=StudentId"}}
                         </div>
                          <div class="mb-3">
-                            {{form.StdentName|add_class:"form-control"|attr:"placeholder=StudentName"}}
+                           <div class="mb-3">
+    {{ form.StdentName|add_class:"form-control"|attr:"type=password"|attr:"placeholder=StudentName" }}
+</div>
                         </div>
                          <div class="mb-3">
                             {{form.StudentMarks|add_class:"form-control"|attr:"placeholder=StudentMarks"}}

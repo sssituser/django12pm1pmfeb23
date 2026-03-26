@@ -3,7 +3,7 @@ from myapp.models import Studentt
 
 class StudentForm(forms.ModelForm):
     StuId = forms.IntegerField()
-    StuName = forms.CharField(max_length=30)
+    StuName = forms.CharField(widget=forms.PasswordInput, max_length=30)
     StuMarks = forms.IntegerField()
     class Meta:
         model = Studentt

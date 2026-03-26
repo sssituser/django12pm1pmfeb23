@@ -13,7 +13,7 @@ class CreateStudent(CreateView):
 
 class UpdateStudent(UpdateView):
     model = Student
-    fields = ["StudentId","StudentName","StudentMarks"]
+    fields = ["StudentId","StdentName","StudentMarks"]
 
 class StudentDetails(DetailView):
     model = Student
