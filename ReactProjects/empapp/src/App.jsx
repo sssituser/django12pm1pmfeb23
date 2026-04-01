@@ -1,11 +1,12 @@
 import React from "react";
+import Employees from "./components/Employees";
 
 export default function App(){
 
 return(
   <React.Fragment>
     <div className="container">
-      <p className="h1  text-center bg-primary text-white mt-5">AppComponent</p>
+      <Employees/>
     </div>
   </React.Fragment>
 )
