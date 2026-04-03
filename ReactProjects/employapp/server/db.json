@@ -1,11 +1,4 @@
 {
-    "employees":[
-        {
-            "eid":111,
-            "ename":"abc",
-            "esal":50000,
-            "imgurls":"https://eskipaper.com/images/beautiful-flowers-pictures-1.jpg",
-            "id":222
-        }
-    ]
+  "employees": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

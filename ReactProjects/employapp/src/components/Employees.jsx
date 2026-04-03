@@ -16,6 +16,14 @@ export default function Employees() {
         getEmployees()
     }, [])
 
+    function del(id){
+        axios.delete(`http://localhost:9000/employees/${id}`)
+        .then(()=>{
+            alert('Record Deleted....')
+            getEmployees()
+        })
+        .catch((error)=>alert(error))
+    }
     return (
         <React.Fragment>
             <div className="container">
@@ -28,7 +36,7 @@ export default function Employees() {
                             </p>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row ">
                         <div className="col-md-8">
                             <Link to='/add' className="btn btn-sm btn-primary">Add Employee</Link>
                         </div>
@@ -49,6 +57,7 @@ export default function Employees() {
                                         <th>Employee Name</th>
                                         <th>Employee Salary</th>
                                         <th>Employee Picture</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,6 +71,15 @@ export default function Employees() {
                                                     <td>
                                                         <img src={emp.imgurls} alt="" height={100} width={100} className="img-fluid"/>
                                                     </td>
+                                                    <td>
+                                                        <Link to={`/find/${emp.id}`}>
+                                                        <i className="fa fa-eye fa-2x text-primary"/>
+                                                        </Link>
+                                                        <Link to={`/edit/${emp.id}`}>
+                                                        <i className="ml-3 fa fa-pen fa-2x text-warning"/>
+                                                        </Link>
+                                                          <i onClick={()=>{del(emp.id)}} className="ml-3 fa fa-trash fa-2x text-danger"/>
+                                                    </td>
                                                 </tr>
                                             )
                                         })
@@ -69,7 +87,7 @@ export default function Employees() {
                                 </tbody>
                             </table>
                             :
-                            <p className="h1 text-danger">Records Not Found</p>
+                            <p className="h1 text-danger text-center">Records Not Found</p>
                     }
                 </section>
             </div>
