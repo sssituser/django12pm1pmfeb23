@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+
 export default function Employees() {
 
     const [employees, setEmployees] = useState([])
@@ -19,14 +21,18 @@ export default function Employees() {
     function del(id){
         axios.delete(`http://localhost:9000/employees/${id}`)
         .then(()=>{
-            alert('Record Deleted....')
-            getEmployees()
+             
+            toast.error('Record Deleted....',{
+                duration:3000,
+                
+            },onclose=getEmployees())
+          
         })
         .catch((error)=>alert(error))
     }
     return (
         <React.Fragment>
-            <div className="container">
+            <div className="container animated jackInTheBox ">
                 <section>
 
                     <div className="row">
@@ -46,7 +52,7 @@ export default function Employees() {
                     </div>
 
                 </section>
-                <section>
+                <section >
                   
                     {
                         employees.length > 0 ?
