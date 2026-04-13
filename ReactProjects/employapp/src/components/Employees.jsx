@@ -8,7 +8,7 @@ export default function Employees() {
     const [employees, setEmployees] = useState([])
 
     function getEmployees() {
-        axios.get("http://localhost:9000/employees")
+        axios.get("http://localhost:8000/employees/")
             .then((res) => {
                 setEmployees(res.data)
             })
@@ -19,7 +19,7 @@ export default function Employees() {
     }, [])
 
     function del(id){
-        axios.delete(`http://localhost:9000/employees/${id}`)
+        axios.delete(`http://localhost:8000/employees/${id}`)
         .then(()=>{
              
             toast.error('Record Deleted....',{

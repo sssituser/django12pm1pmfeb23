@@ -58,7 +58,7 @@ function AddEmployee() {
 
         if (!validate()) return   // ❌ Stop if errors
 
-        axios.post("http://localhost:9000/employees", employee)
+        axios.post("http://localhost:8000/employees", employee)
             .then(() => {
                 toast.success("Employee Added Successfully",{
                     duration:4000,

@@ -13,7 +13,7 @@ function EditEmployee() {
   }
   function updateEmployee(event){
     event.preventDefault()
-    axios.put(`http://localhost:9000/employees/${id}`,employee)
+    axios.put(`http://localhost:8000/employees/${id}`,employee)
     .then(()=>{
       alert("Employee Updated")
        navigate('/')
