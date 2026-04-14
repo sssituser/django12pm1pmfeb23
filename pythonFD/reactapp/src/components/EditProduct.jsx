@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams,Link } from "react-router-dom";
+import { toast } from "react-toastify";
 export default function EditProduct(){
     const[product,setProduct]=useState({})
     let {id} = useParams()
@@ -25,10 +26,15 @@ export default function EditProduct(){
         })
 
     }    
-    function save(){
+    function save(event){
+        event.preventDefault()
         axios.put(`http://localhost:8000/products/${id}/`,product)
-        .then(()=>alert('Record is updated'))
-        navi('/')
+        .then(()=>{
+            toast.success("Record Updated..")
+            setTimeout(()=>{
+                navi("/")
+            },4000)
+        })
         .catch((error)=>{
             alert(error)
         })
@@ -40,7 +46,7 @@ export default function EditProduct(){
                
                 <div className="row d-flex  justify-content-center">
                     <div className="col-md-5">
-                        <div className="card animated jello">
+                        <div className="card">
                         <div className="card-header text-center text-white   bg-secondary   ">
                                 <p className="h1">Edit Page</p>
                         </div>

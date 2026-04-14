@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function AddProduct(){
 let navi = useNavigate()
@@ -20,10 +21,12 @@ function save(event){
     event.preventDefault()
     axios.post("http://localhost:8000/products/",product)
     .then(()=>{
-        alert("Product Added..")
+        toast.success("Product Added..")
+       setTimeout(()=>{
         navi('/')
+       },4000)
     })
-    .catch((er)=>alert(er))
+    .catch((er)=>toast.error(er))
 }
     return(
         <React.Fragment>

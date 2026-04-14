@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import { toast } from "react-toastify";
 export default function Products(){
     const[products,setProducts]=useState([])// useState hook
+    const [search, setSearch] = useState('');
+    
+const filteredProducts = products.filter((product) =>
+  product.prodid.toString().includes(search) ||
+  product.prodname.toLowerCase().includes(search.toLowerCase()) ||
+  product.prodprice.toString().toLowerCase().includes(search)
+);
+
+
     function getProducts(){
         axios.get("http://localhost:8000/products/")
         .then((res)=>{
@@ -15,10 +25,10 @@ export default function Products(){
     function del(id){
         axios.delete(`http://localhost:8000/products/${id}/`)
         .then(()=>{
-            alert("Record Deleted")
+            toast.error("Record Deleted")
             getProducts()
         })
-        .catch((er)=>alert(er+"........"))
+        .catch((er)=>toast.error(er+"........"))
     }
   useEffect(()=>{
     getProducts()
@@ -26,7 +36,7 @@ export default function Products(){
     return(
         <React.Fragment>
            <section className="mt-5">
-              <div className="container">
+              <div className="container animated zoomIn">
                   <p className="lead text-primary">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum labore ad atque ut dolore! Quod veniam dolorem odit ad sit laboriosam perspiciatis dicta doloremque accusamus nostrum minus dignissimos provident repudiandae esse tenetur molestiae corporis, officiis amet velit, praesentium similique ipsum dolores. Porro, non iure. Aliquam soluta id ipsam amet veniam hic corporis necessitatibus delectus a quae? Dolor ab neque unde molestiae maxime, deserunt doloribus vel, a asperiores sint mollitia distinctio?
                 </p>
@@ -35,19 +45,19 @@ export default function Products(){
                         <Link to='/add' className="btn btn-md btn-secondary">Register Product</Link>
                     </div>
                     <div className="col-md-4">
-                        <input type="search" className="form-control"/>
+                        <input type="search" onChange={(e)=>{setSearch(e.target.value)}} className="form-control"/>
                     </div>
                 </div>
               </div>
            </section>
            <section>
-             <div className="container">
+             <div className="container animated jackInTheBox">
                
                
                 <div className="row">
                     <div className="col">
                        {
-                            products.length>0 ?
+                            filteredProducts.length>0 ?
                            <table className="table table-bordered table-hover table-striped text-center">
                               <thead className="bg-secondary text-white">
                                 <tr>
@@ -59,7 +69,7 @@ export default function Products(){
                               </thead>
                               <tbody>
                                 {
-                                    products.map((prod)=>{
+                                    filteredProducts.map((prod)=>{
                                         return(
                                             <tr>
                                                 <td>{prod.prodid}</td>
