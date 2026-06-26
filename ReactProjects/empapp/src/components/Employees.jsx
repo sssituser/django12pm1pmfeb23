@@ -6,7 +6,7 @@ export default function Employees(){
 let[employees,setEmployees]=useState([])
 
 useEffect(()=>{
-    axios.get("http://localhost:9000/employees")
+    axios.get("http://localhost:8000/employees")
     .then((res)=>{
         setEmployees(res.data)
     })

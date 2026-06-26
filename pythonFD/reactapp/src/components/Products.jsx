@@ -1,102 +1,142 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import {Link} from 'react-router-dom'
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-export default function Products(){
-    const[products,setProducts]=useState([])// useState hook
-    const [search, setSearch] = useState('');
-    
-const filteredProducts = products.filter((product) =>
-  product.prodid.toString().includes(search) ||
-  product.prodname.toLowerCase().includes(search.toLowerCase()) ||
-  product.prodprice.toString().toLowerCase().includes(search)
-);
 
+export default function Products() {
 
-    function getProducts(){
+    const [Products, setProducts] = useState([]);
+
+    // Get Products
+    function getProducts() {
         axios.get("http://localhost:8000/products/")
-        .then((res)=>{
-            setProducts(res.data)
-        })
-        .catch((error)=>{
-            alert(error)
-        })
+            .then((res) => {
+                setProducts(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
-    function del(id){
-        axios.delete(`http://localhost:8000/products/${id}/`)
-        .then(()=>{
-            toast.error("Record Deleted")
-            getProducts()
-        })
-        .catch((er)=>toast.error(er+"........"))
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
+    // Delete Product
+    function del(id) {
+
+        if(window.confirm("Are you sure you want to delete?")){
+
+            axios.delete(`http://localhost:8000/products/${id}/`)
+                .then(() => {
+
+                    toast.success("Record Deleted Successfully", {
+                        position: "top-center",
+                        autoClose: 3000
+                    });
+
+                    // Refresh Product List
+                    getProducts();
+                })
+                .catch((error) => {
+                    console.log(error);
+                    toast.error("Delete Failed");
+                });
+        }
     }
-  useEffect(()=>{
-    getProducts()
-  },[])
-    return(
+
+    return (
         <React.Fragment>
-           <section className="mt-5">
-              <div className="container animated zoomIn">
-                  <p className="lead text-primary">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum labore ad atque ut dolore! Quod veniam dolorem odit ad sit laboriosam perspiciatis dicta doloremque accusamus nostrum minus dignissimos provident repudiandae esse tenetur molestiae corporis, officiis amet velit, praesentium similique ipsum dolores. Porro, non iure. Aliquam soluta id ipsam amet veniam hic corporis necessitatibus delectus a quae? Dolor ab neque unde molestiae maxime, deserunt doloribus vel, a asperiores sint mollitia distinctio?
-                </p>
-                <div className="row mb-5">
-                    <div className="col-md-8">
-                        <Link to='/add' className="btn btn-md btn-secondary">Register Product</Link>
-                    </div>
-                    <div className="col-md-4">
-                        <input type="search" onChange={(e)=>{setSearch(e.target.value)}} className="form-control"/>
-                    </div>
-                </div>
-              </div>
-           </section>
-           <section>
-             <div className="container animated jackInTheBox">
-               
-               
-                <div className="row">
-                    <div className="col">
-                       {
-                            filteredProducts.length>0 ?
-                           <table className="table table-bordered table-hover table-striped text-center">
-                              <thead className="bg-secondary text-white">
-                                <tr>
-                                    <th>Product ID</th>
-                                    <th>Product Name</th>
-                                    <th>Product Price</th>
-                                    <th>Actions</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {
-                                    filteredProducts.map((prod)=>{
-                                        return(
-                                            <tr>
-                                                <td>{prod.prodid}</td>
-                                                <td>{prod.prodname}</td>
-                                                <td>{prod.prodprice}</td>
-                                                <td>
-                                                    <Link to={`/find/${prod.id}`}><i className="fa fa-eye text-primary fa-2x mr-3"/></Link>
-                                                    <Link to={`/edit/${prod.id}`}><i className="fa fa-pen text-warning fa-2x mr-3"/></Link>
-                                                    <i onClick={()=>{del(prod.id)}} className="fa fa-trash fa-2x text-danger"/>
+            <div className="container animated jackInTheBox">
 
-                                                </td>
-                                            </tr>
-                                        )
+                <section>
 
-                                    })
-                                }
-                              </tbody>
-                           </table>
-                            :
-                            <p className="h1">
-                                <p className="h1 text-danger text-center">Records Not Found</p>
+                    <div className="row">
+                        <div className="col">
+                            <p className="lead text-teal">
+                                Product Management System
                             </p>
-                       }
+                        </div>
                     </div>
-                </div>
+
+                    <div className="row">
+                        <div className="col-md-8">
+                            <Link to="/add" className="btn btn-sm btn-primary">
+                                Add Product
+                            </Link>
+                        </div>
+
+                        <div className="col-md-4">
+                            <input
+                                type="search"
+                                className="form-control"
+                                placeholder="Search Product"
+                            />
+                        </div>
+                    </div>
+
+                </section>
+
+                <section className="mt-4">
+
+                    {
+                        Products.length > 0 ?
+
+                            <table className="table table-bordered table-striped table-hover text-center">
+
+                                <thead className="bg-secondary text-white">
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Product Name</th>
+                                        <th>Product Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {
+                                        Products.map((product) => {
+                                            return (
+                                                <tr key={product.id}>
+                                                    <td>{product.prodid}</td>
+                                                    <td>{product.prodname}</td>
+                                                    <td>{product.prodprice}</td>
+
+                                                    <td>
+
+                                                        <Link to={`/find/${product.id}`}>
+                                                            <i className="fa fa-eye fa-2x text-primary"></i>
+                                                        </Link>
+
+                                                        <Link to={`/edit/${product.id}`}>
+                                                            <i className="ml-3 fa fa-pen fa-2x text-warning"></i>
+                                                        </Link>
+
+                                                        <i
+                                                            onClick={() => del(product.id)}
+                                                            className="ml-3 fa fa-trash fa-2x text-danger"
+                                                            style={{ cursor: "pointer" }}
+                                                        ></i>
+
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })
+                                    }
+                                </tbody>
+
+                            </table>
+
+                            :
+
+                            <p className="h1 text-danger text-center">
+                                Records Not Found
+                            </p>
+                    }
+
+                </section>
+
             </div>
-           </section>
         </React.Fragment>
-    )
+    );
 }
