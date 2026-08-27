@@ -1,0 +1,69 @@
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: fddb_mysql
+    restart: unless-stopped
+
+    environment:
+      MYSQL_DATABASE: fddb
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot --silent"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+
+  backend:
+    build:
+      context: ./Django Rest Api
+
+    container_name: fddb_backend
+    restart: unless-stopped
+
+    volumes:
+      - ./Django Rest Api:/app
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      DB_NAME: fddb
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: db
+      DB_PORT: "3306"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./React App
+
+    container_name: fddb_frontend
+    restart: unless-stopped
+
+    volumes:
+      - ./React App:/app
+      - /app/node_modules
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - backend
+
+
+volumes:
+  mysql_data:
